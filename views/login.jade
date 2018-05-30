@@ -1,0 +1,15 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/style/main.css')
+    script(src='/js/jquery.js')
+    script(src='/js/login.js')
+  body
+    block content
+    h1= '登录'
+    label 用户名
+      input(type="text", name="username")
+    label 密码
+      input(type="text", name="password")
+    button 登录

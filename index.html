@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script src="http://code.jquery.com/jquery-latest.js"></script>
+  <script>
+    $.ajax({
+      url: 'http://127.0.0.1:8888/search?name=liyan&id=233',
+      type: 'get',
+      success: function(res){
+        console.log(res)
+      }
+    })
+
+    const name = 'zhangsan'
+    const user = {
+      name: 'liyan',
+      sayName: () => {
+        console.log('name', this.name)
+      }
+    }
+    user.sayName()
+    var tt = user.sayName
+    tt()
+
+    const coco = {
+      name: 'liuyong',
+      say: function() {
+        setTimeout(function () {
+          console.log(this)
+        }.bind(this), 1000)
+      }
+    }
+    console.log('say', coco.say()) // user1  liuyong
+
+    // factory function工厂函数
+    function createUser(name){
+      return {
+        name,
+        sayName: function(){
+          console.log(this, this.name)
+        }
+      }
+    }
+
+    const a = createUser('lili')
+    a.sayName() // 如果是一般函数，this指向工厂函数本身，如果是箭头函数，this指向的是window
+
+    // constructor function构造函数
+    function createUser1(name){
+      this.name = name
+      this.sayName = () => {
+        console.log(this, this.name)
+      }
+    }
+    const b = new createUser1('kuku')
+    b.sayName() // 无论是否使用箭头函数，这里指向的this都是构造函数本身
+
+    function Circle(radius){
+      this.radius = radius
+      this.draw = function(){
+        console.log('draw')
+      }
+
+      let name = 250
+
+      Object.defineProperty(this, 'name', {
+        get: function(){
+          return name
+        },
+        set: function(value){
+          if (value < 10) throw new Error('数值小于10')
+          name = value
+        }
+      })
+    }
+    const aa = new Circle(158)
+    aa.name = 15
+    console.log(aa, aa.name) // 15
+    const bb = new Circle(168)
+    console.log(bb, bb.name) // 250
+
+  </script>
+</body>
+</html>
