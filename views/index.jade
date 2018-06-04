@@ -5,6 +5,11 @@ html
     link(rel='stylesheet', href='/style/main.css')
   body
     block content
-    h1= 'home'
-    a(href="/res") 注册
-    a(href="/login") 登录
+    .nav 
+      .mid
+        a(href="/") 首页
+        a(href="/post") 文章
+          .right
+            a(href="/res") 注册
+            a(href="/login") 登录
+    

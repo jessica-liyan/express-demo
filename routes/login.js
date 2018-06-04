@@ -20,7 +20,7 @@ router.post('/', (req, res) => {
     }
     if(req.body.password === arr.find(x => x.username === req.body.username).password){
       res.send({
-        status: 0,
+        status: 1,
         message: '登录成功！',
         data: arr.find(x => x.username === req.body.username)
       })
